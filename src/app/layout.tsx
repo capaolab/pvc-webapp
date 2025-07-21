@@ -1,4 +1,9 @@
+/**
+ * @description Olhar a documentação do Mantine para mais detalhes sobre os arquivos CSS que devem ser importados.
+ * @see https://mantine.dev/styles/css-files-list/
+ */
 import '@mantine/core/styles.css';
+import '@mantine/spotlight/styles.css';
 import './globals.css';
 
 import {
@@ -9,6 +14,7 @@ import {
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
+import AppContentProvider from '@/provider/AppContentProvider';
 import theme from '@/theme';
 
 const geistSans = Geist({
@@ -34,10 +40,12 @@ export default function RootLayout({
   return (
     <html lang='en' {...mantineHtmlProps}>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme='light' />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme} defaultColorScheme='light'>
+          <AppContentProvider>{children}</AppContentProvider>
+        </MantineProvider>
       </body>
     </html>
   );

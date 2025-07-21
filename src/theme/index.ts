@@ -19,8 +19,6 @@ const theme = createTheme({
     lg: '1024px', // Laptop
     xl: '1280px', // Desktop
   },
-  fontFamily: 'Manrope, sans-serif',
-  fontFamilyMonospace: 'IBM Plex Mono, monospace',
   fontSizes: {
     xs: '12px',
     sm: '14px',

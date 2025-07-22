@@ -1,5 +1,7 @@
 import { Anchor, Container, Title } from '@mantine/core';
 
+import SideBar from '@/components/SideBar';
+
 function Home() {
   return (
     <Container size='md'>
@@ -16,6 +18,7 @@ function Home() {
           Capão Lab
         </Anchor>
       </Title>
+      <SideBar />
     </Container>
   );
 }

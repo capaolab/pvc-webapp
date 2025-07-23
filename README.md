@@ -10,3 +10,4 @@
 
 ## Referencias
 - [Table Icons](https://tabler.io/icons)
+- [Exemplo de modelo de design para o blog](https://dribbble.com/shots/23547729-Horizone-Blog-Page)

@@ -13,7 +13,6 @@ import {
 } from '@mantine/core';
 import { useDisclosure, useHeadroom, useWindowScroll } from '@mantine/hooks';
 import {
-  IconArrowRight,
   IconArticle,
   IconBadgeAd,
   IconCoin,
@@ -63,8 +62,15 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           transform: `translate3d(0, ${pinned ? 0 : '-110px'}, 0)`,
           transition: 'transform 400ms ease',
         }}
+        color='white'
       >
-        <Burger opened={opened} onClick={toggle} hiddenFrom='lg' size='md' />
+        <Burger
+          color='white'
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom='lg'
+          size='md'
+        />
         <Anchor href='#home' underline='never' className={classes.logo}>
           <Image
             src={content?.logo?.src || '/logo.png'}
@@ -77,7 +83,6 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           </Title>
         </Anchor>
         <Flex
-          id='menu-desktop'
           component='ul'
           align='center'
           justify='center'
@@ -100,13 +105,10 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           <Anchor href='#' target='_self' underline='never'>
             Contato
           </Anchor>
-          <Button
-            variant={atTop ? 'default' : 'filled'}
-            leftSection={<IconCoin size={14} />}
-          >
+          <Button variant='default' leftSection={<IconCoin size={14} />}>
             Quero Patrocinar
           </Button>
-          <Button variant='transparent' c={atTop ? 'white' : 'dark'}>
+          <Button variant='transparent' c='white'>
             Login
           </Button>
           <Button variant='default' radius='sm' c='dark'>

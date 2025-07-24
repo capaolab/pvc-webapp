@@ -10,6 +10,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
 
 import classes from './Banner.module.css';
 
@@ -84,16 +85,16 @@ function Card({ image, title, category }: CardProps) {
 
 export default function Banner() {
   const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-
-  console.log('mobile', mobile);
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
 
   return (
     <Carousel
-      className={classes.carrosell}
-      // slideSize={{ base: '100%', sm: '50%' }}
+      classNames={classes}
+      withIndicators
       slideGap={{ base: 'xl', sm: 2 }}
-      emblaOptions={{ align: 'start', slidesToScroll: mobile ? 1 : 1 }}
+      emblaOptions={{ align: 'start', slidesToScroll: 1 }}
+      nextControlIcon={!mobile && <IconArrowRight size={25} />}
+      previousControlIcon={!mobile && <IconArrowLeft size={25} />}
     >
       {data.map(item => (
         <Carousel.Slide key={item.title}>

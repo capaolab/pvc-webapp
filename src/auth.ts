@@ -1,27 +1,31 @@
-import { TypeORMAdapter } from '@auth/typeorm-adapter';
 import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 
-import {
-  AccountEntity,
-  SessionEntity,
-  UserEntity,
-  VerificationTokenEntity,
-} from '@/core/user/user.entitie';
+import { handleAuthentication } from './lib/auth.lib';
+import { signInSchema } from './lib/zod.schemas';
 
-const entities = {
-  UserEntity,
-  AccountEntity,
-  SessionEntity,
-  VerificationTokenEntity,
-};
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    Credentials({
+      credentials: {
+        email: {},
+        password: {},
+      },
+      authorize: async credentials => {
+        let user = null;
 
-const authConfig = {
-  adapter: TypeORMAdapter({
-    type: 'postgres',
-    url: process.env.AUTH_TYPEORM_CONNECTION as string,
-    entities,
-  }),
-  providers: [],
-};
+        const { email, password } = await signInSchema.parseAsync(credentials);
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+        // logic to verify if the user exists
+        // user = await handleAuthentication(email, password)
+        user = 'viriato';
+
+        if (!user) {
+          throw new Error('Invalid credentials.');
+        }
+
+        return user;
+      },
+    }),
+  ],
+});

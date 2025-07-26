@@ -1,10 +1,10 @@
-import { DevDataSource } from '@/lib/db.lib';
+import { AppDataSource } from '@/lib/db.lib';
 
-import User from './user.entitie';
+import { UserEntity } from './user.entitie';
 
 class UserRepository {
-  async getUserByEmail(userEmail: string): Promise<User | null> {
-    const user = await DevDataSource.getRepository(User).findOneBy({
+  async getUserByEmail(userEmail: string): Promise<UserEntity | null> {
+    const user = await AppDataSource.getRepository(UserEntity).findOneBy({
       email: userEmail,
     });
     return user;

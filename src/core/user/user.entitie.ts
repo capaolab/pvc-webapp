@@ -24,13 +24,16 @@ export class UserEntity {
   id!: string;
 
   @Column({ type: 'varchar', nullable: true })
-  name!: string | null;
+  username!: string | null;
 
   @Column({ type: 'varchar', nullable: true, unique: true })
   email!: string | null;
 
   @Column({ type: 'varchar', nullable: true, transformer: transformer.date })
   emailVerified!: string | null;
+
+  @Column({ type: 'varchar', nullable: true })
+  password!: string;
 
   @Column({ type: 'varchar', nullable: true })
   image!: string | null;

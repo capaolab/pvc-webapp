@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const DevDataSource = new DataSource({
   type: 'postgres',
@@ -9,6 +10,7 @@ export const DevDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true, // Disable in production
   logging: process.env.NODE_ENV === 'development',
+  namingStrategy: new SnakeNamingStrategy(),
 });
 
 DevDataSource.initialize()

@@ -1,41 +1,27 @@
+import { TypeORMAdapter } from '@auth/typeorm-adapter';
 import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
 
-import User from '@/core/user/user.entitie';
-// Your own logic for dealing with plaintext password strings; be careful!
-import { handleAuthentication } from '@/lib/auth.lib';
+import {
+  AccountEntity,
+  SessionEntity,
+  UserEntity,
+  VerificationTokenEntity,
+} from '@/core/user/user.entitie';
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    Credentials({
-      credentials: {
-        email: {},
-        password: {},
-      },
-      authorize: async credentials => {
-        let user: User | null = null;
+const entities = {
+  UserEntity,
+  AccountEntity,
+  SessionEntity,
+  VerificationTokenEntity,
+};
 
-        if (
-          typeof credentials?.password !== 'string' ||
-          typeof credentials?.email !== 'string'
-        ) {
-          throw new Error('Invalid credentials.');
-        }
+const authConfig = {
+  adapter: TypeORMAdapter({
+    type: 'postgres',
+    url: process.env.AUTH_TYPEORM_CONNECTION as string,
+    entities,
+  }),
+  providers: [],
+};
 
-        user = await handleAuthentication(
-          credentials.email,
-          credentials.password,
-        );
-
-        if (!user) {
-          return null;
-        }
-
-        return {
-          id: String(user.id),
-          email: user.email,
-        };
-      },
-    }),
-  ],
-});
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);

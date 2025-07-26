@@ -3,14 +3,13 @@ services:
     image: postgres:16
     container_name: pvc_postgres
     environment:
-      POSTGRES_USER: ${NEXT_DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${NEXT_DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${NEXT_DB_DB:-postgres}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./sql/pvc_ddl.sql:/docker-entrypoint-initdb.d/pvc_ddl.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s

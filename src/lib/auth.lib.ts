@@ -1,8 +1,6 @@
-'use server';
-
 import { randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 
-import User from '@/core/user/user.entitie';
+import { UserEntity } from '@/core/user/user.entitie';
 import UserRepository from '@/core/user/user.repository';
 
 const userRepository = new UserRepository();
@@ -12,7 +10,7 @@ const userRepository = new UserRepository();
  * @param password The plain text password to hash.
  * @returns The salt and hashed password, joined by a dot.
  */
-export function hashPassword(password: string): string {
+export async function hashPassword(password: string): Promise<string> {
   const salt = randomBytes(16).toString('hex');
   const hash = scryptSync(password, salt, 64).toString('hex');
   return `${salt}.${hash}`;
@@ -24,7 +22,10 @@ export function hashPassword(password: string): string {
  * @param hashed The hashed password from the database (format: salt.hash).
  * @returns True if the password is valid, false otherwise.
  */
-export function isPasswordValid(password: string, hashed: string): boolean {
+export async function isPasswordValid(
+  password: string,
+  hashed: string,
+): Promise<boolean> {
   const [salt, hash] = hashed.split('.');
   if (!salt || !hash) return false;
   const hashBuffer = Buffer.from(hash, 'hex');
@@ -32,10 +33,10 @@ export function isPasswordValid(password: string, hashed: string): boolean {
   return timingSafeEqual(hashBuffer, passwordHashBuffer);
 }
 
-export function handleAuthentication(
+export async function handleAuthentication(
   userEmail: string,
   userPassword: string,
-): Promise<User | null> {
+): Promise<UserEntity | null> {
   if (!userEmail) {
     throw new Error('Email is required to fetch user.');
   }

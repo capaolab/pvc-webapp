@@ -1,9 +1,15 @@
+'use client';
+
 import { Anchor, Container, Title } from '@mantine/core';
 
+import useAppContent from '@/hooks/useAppContent';
+
 function Home() {
+  const { content } = useAppContent();
+
   return (
     <Container size='md'>
-      <Title order={1}>Portal Vale do Capão</Title>
+      <Title order={1}>{content.title}</Title>
       <Title order={2}>
         Desenvolvido por
         <Anchor

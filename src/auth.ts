@@ -11,8 +11,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async credentials => {
-        const user = null;
+        let user = null;
+
+        //eslint ignore
         const { email, password } = await signInSchema.parseAsync(credentials);
+
+        user = {
+          id: '1',
+          name: 'admin',
+          email,
+          password,
+        };
 
         if (!user) {
           throw new Error('Invalid credentials.');

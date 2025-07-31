@@ -5,7 +5,6 @@ import {
   Avatar,
   Burger,
   Flex,
-  Group,
   Image,
   Indicator,
   NavLink,

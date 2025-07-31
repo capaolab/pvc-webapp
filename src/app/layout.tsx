@@ -5,6 +5,7 @@
 import '@mantine/core/styles.css';
 import '@mantine/spotlight/styles.css';
 import '@mantine/carousel/styles.css';
+import '@gfazioli/mantine-flip/styles.css';
 import './globals.css';
 
 import {

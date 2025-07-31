@@ -1,6 +1,6 @@
 'use client';
 
-import { Anchor, Box, Container, Title } from '@mantine/core';
+import { Anchor, Box, Title } from '@mantine/core';
 
 import Banner from '@/components/Banner';
 import HomeLayout from '@/components/Layouts/HomeLayout';

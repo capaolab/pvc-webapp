@@ -18,6 +18,7 @@ import {
   IconCoin,
   IconLayoutDashboard,
 } from '@tabler/icons-react';
+import { useEffect } from 'react';
 
 import useAppContent from '@/hooks/useAppContent';
 
@@ -29,9 +30,14 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
   const { content } = useAppContent();
   const theme = useMantineTheme();
   const pinned = useHeadroom({ fixedAt: 120 });
-  const atTop = scroll.y < 720;
+  const atTop = scroll.y < 600;
 
-  console.log(scroll);
+  useEffect(() => {
+    document.body.style.overflow = opened ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [opened]);
 
   return (
     <AppShell
@@ -59,18 +65,12 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           padding: 'var(--mantine-spacing-xs)',
           height: 60,
           zIndex: 10,
+          display: `${opened ? 'none' : 'flex'}`,
           transform: `translate3d(0, ${pinned ? 0 : '-110px'}, 0)`,
           transition: 'transform 400ms ease',
         }}
         color='white'
       >
-        <Burger
-          color='white'
-          opened={opened}
-          onClick={toggle}
-          hiddenFrom='lg'
-          size='md'
-        />
         <Anchor href='#home' underline='never' className={classes.logo}>
           <Image
             src={content?.logo?.src || '/logo.png'}
@@ -78,7 +78,7 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
             w={content?.logo?.width || 30}
             h={content?.logo?.height || 30}
           />
-          <Title order={2} textWrap='nowrap'>
+          <Title order={2} fw={700} textWrap='nowrap'>
             Vale do Capão
           </Title>
         </Anchor>
@@ -115,6 +115,13 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
             Sign Up
           </Button>
         </Flex>
+        <Burger
+          color='white'
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom='lg'
+          size='md'
+        />
       </AppShell.Header>
       <AppShell.Navbar bg={theme.white}>
         <Flex w='100%' direction='column' justify='flex-start' gap='md' px='md'>

@@ -11,6 +11,8 @@ import {
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowLeft, IconArrowRight } from '@tabler/icons-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
 
 import classes from './Banner.module.css';
 
@@ -86,6 +88,7 @@ function Card({ image, title, category }: CardProps) {
 export default function Banner() {
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.md})`);
+  const autoplay = useRef(Autoplay({ delay: 5000 }));
 
   return (
     <Carousel
@@ -93,6 +96,8 @@ export default function Banner() {
       withIndicators
       slideGap={{ base: 'xl', sm: 2 }}
       emblaOptions={{ align: 'start', slidesToScroll: 1 }}
+      controlsOffset='sm'
+      plugins={[autoplay.current]}
       nextControlIcon={!mobile && <IconArrowRight size={25} />}
       previousControlIcon={!mobile && <IconArrowLeft size={25} />}
     >

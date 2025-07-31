@@ -1,3 +1,5 @@
+'use client';
+
 import { Anchor, Container, Title } from '@mantine/core';
 
 import useAppContent from '@/hooks/useAppContent';

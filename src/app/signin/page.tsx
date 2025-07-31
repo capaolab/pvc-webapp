@@ -4,8 +4,8 @@ import { Flip } from '@gfazioli/mantine-flip';
 import { Anchor, Container, Flex, Image, Text, Title } from '@mantine/core';
 import { useState } from 'react';
 
-import SingInForm from '@/components/Forms/SingInForm';
-import SingUpForm from '@/components/Forms/SingUpForm';
+import SignInForm from '@/components/Forms/SignInForm';
+import SignUpForm from '@/components/Forms/SignUpForm';
 import useAppContent from '@/hooks/useAppContent';
 
 function SignIn() {
@@ -51,8 +51,8 @@ function SignIn() {
           </Text>
         )}
         <Flip h={200} w={{ base: 350, md: 400 }} flipped={flipped}>
-          <SingInForm />
-          <SingUpForm />
+          <SignInForm />
+          <SignUpForm />
         </Flip>
       </Flex>
     </Container>

@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
-function SingUpForm() {
+function SignInForm() {
   const theme = useMantineTheme();
 
   const form = useForm({
@@ -57,10 +57,9 @@ function SingUpForm() {
           </Button>
         </Group>
         <Divider label='ou' labelPosition='center' my='lg' />
-        <Group justify='flex-start' mt='xl'></Group>
       </Paper>
     </form>
   );
 }
 
-export default SingUpForm;
+export default SignInForm;

@@ -53,7 +53,7 @@ function SignUpForm() {
         />
         <Group justify='flex-end' mt='xl'>
           <Button w='100%' type='submit'>
-            Submit
+            Cadastrar
           </Button>
         </Group>
         <Divider label='ou' labelPosition='center' my='lg' />

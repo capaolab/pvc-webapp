@@ -53,7 +53,7 @@ function SignInForm() {
         />
         <Group justify='flex-end' mt='xl'>
           <Button w='100%' type='submit'>
-            Submit
+            Entrar
           </Button>
         </Group>
         <Divider label='ou' labelPosition='center' my='lg' />

@@ -15,11 +15,14 @@ import { useDisclosure, useHeadroom, useWindowScroll } from '@mantine/hooks';
 import {
   IconArticle,
   IconBadgeAd,
-  IconCoin,
+  IconCalendarCheck,
   IconLayoutDashboard,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
+import ContactModal from '@/components/Modals/ContactModal';
+import SponsorModal from '@/components/Modals/SponsorModal';
 import useAppContent from '@/hooks/useAppContent';
 
 import classes from './HomeLayout.module.css';
@@ -71,7 +74,12 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
         }}
         color='white'
       >
-        <Anchor href='#home' underline='never' className={classes.logo}>
+        <Anchor
+          href='#home'
+          underline='never'
+          component={Link}
+          className={classes.logo}
+        >
           <Image
             src={content?.logo?.src || '/logo.png'}
             alt='Logo'
@@ -87,30 +95,26 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           align='center'
           justify='center'
           gap='md'
+          mr='auto'
           display={{ base: 'none', lg: 'flex' }}
           className={classes.menu}
         >
-          <Anchor href='#' target='_self' underline='never'>
-            Home
-          </Anchor>
-          <Anchor href='#' target='_blank' underline='never'>
+          <Link href='#' className='link'>
             Agenda
-          </Anchor>
-          <Anchor href='#' target='_self' underline='never'>
+          </Link>
+          <Link href='#' className='link'>
             Blog
-          </Anchor>
-          <Anchor href='#' target='_self' underline='never'>
+          </Link>
+          <Link href='#' className='link'>
             Serviços
-          </Anchor>
-          <Anchor href='#' target='_self' underline='never'>
-            Contato
-          </Anchor>
-          <Button variant='default' leftSection={<IconCoin size={14} />}>
-            Quero Patrocinar
-          </Button>
-          <Button variant='transparent' c='white'>
+          </Link>
+          <ContactModal />
+        </Flex>
+        <Flex gap='md' align='center' display={{ base: 'none', lg: 'flex' }}>
+          <SponsorModal />
+          <Anchor href='/signin' underline='never' component={Link} c='white'>
             Login
-          </Button>
+          </Anchor>
           <Button variant='default' radius='sm' c='dark'>
             Sign Up
           </Button>
@@ -144,20 +148,30 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           <Flex py={20} direction='column' justify='flex-start' gap={10}>
             <NavLink
               href='/dashboard'
+              label='Agenda'
+              variant='filled'
+              component={Link}
+              leftSection={<IconCalendarCheck size={content.svgSize} />}
+            />
+            <NavLink
+              href='/dashboard'
               label='Dashboard'
               variant='filled'
+              component={Link}
               leftSection={<IconLayoutDashboard size={content.svgSize} />}
             />
             <NavLink
               href='/blog'
               label='Blog'
               variant='filled'
+              component={Link}
               leftSection={<IconArticle size={content.svgSize} />}
             />
             <NavLink
               href='/anuncios'
               label='Anúncios'
               variant='filled'
+              component={Link}
               leftSection={<IconBadgeAd size={content.svgSize} />}
             />
           </Flex>

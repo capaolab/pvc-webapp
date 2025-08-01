@@ -1,10 +1,14 @@
 import { Button, Flex, Modal, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconXboxX } from '@tabler/icons-react';
+import { IconPhone, IconXboxX } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ContactModal() {
+type IProps = {
+  svgSize?: number;
+};
+
+function ContactModal({ svgSize }: IProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -17,7 +21,12 @@ function ContactModal() {
           icon: <IconXboxX size={20} stroke={1.5} />,
         }}
       >
-        <Flex justify='space-between' align='center'>
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          gap={{ base: 20, md: 0 }}
+          justify='space-between'
+          align='center'
+        >
           <NavLink
             href='/#'
             label='Whatsapp'
@@ -63,7 +72,9 @@ function ContactModal() {
         </Flex>
       </Modal>
 
+      {/* Desktop Button */}
       <Button
+        display={{ base: 'none', lg: 'block' }}
         variant='transparent'
         fz='inherit'
         fw='inherit'
@@ -71,6 +82,22 @@ function ContactModal() {
         p={0}
         color='white'
         onClick={open}
+      >
+        Contato
+      </Button>
+
+      {/* Mobile Button */}
+      <Button
+        display={{ base: 'block', lg: 'none' }}
+        variant='transparent'
+        onClick={open}
+        leftSection={<IconPhone size={svgSize || 14} />}
+        w='max-content'
+        p={0}
+        mx='xs'
+        color='dark'
+        size='inherit'
+        fw='inherit'
       >
         Contato
       </Button>

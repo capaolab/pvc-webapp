@@ -1,9 +1,20 @@
-import { Button, Flex, Modal, NumberInput, TextInput } from '@mantine/core';
+import {
+  Button,
+  Flex,
+  Modal,
+  NavLink,
+  NumberInput,
+  TextInput,
+} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCoin, IconXboxX } from '@tabler/icons-react';
 
-function SponsorModal() {
+type IProps = {
+  svgSize?: number;
+};
+
+function SponsorModal({ svgSize }: IProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   const form = useForm({
@@ -23,7 +34,6 @@ function SponsorModal() {
       },
       lastname: value => {
         if (value.length < 3) return 'Sobrenome muito curto';
-        if (value) return 'Sobren';
         return null;
       },
       email: value => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
@@ -94,10 +104,28 @@ function SponsorModal() {
         </form>
       </Modal>
 
+      {/* Desktop Button */}
       <Button
+        display={{ base: 'none', lg: 'block' }}
         variant='default'
         onClick={open}
         leftSection={<IconCoin size={14} />}
+      >
+        Quero Patrocinar
+      </Button>
+
+      {/* Mobile Button */}
+      <Button
+        display={{ base: 'block', lg: 'none' }}
+        variant='transparent'
+        onClick={open}
+        leftSection={<IconCoin size={svgSize || 14} />}
+        w='max-content'
+        p={0}
+        mx='xs'
+        color='dark'
+        size='inherit'
+        fw='inherit'
       >
         Quero Patrocinar
       </Button>

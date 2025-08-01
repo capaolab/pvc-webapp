@@ -14,9 +14,9 @@ import {
 import { useDisclosure, useHeadroom, useWindowScroll } from '@mantine/hooks';
 import {
   IconArticle,
-  IconBadgeAd,
   IconCalendarCheck,
-  IconLayoutDashboard,
+  IconIcons,
+  IconLogin,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -29,7 +29,7 @@ import classes from './HomeLayout.module.css';
 
 function HomeLayout({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure();
-  const [scroll, scrollTo] = useWindowScroll();
+  const [scroll] = useWindowScroll();
   const { content } = useAppContent();
   const theme = useMantineTheme();
   const pinned = useHeadroom({ fixedAt: 120 });
@@ -68,7 +68,7 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           padding: 'var(--mantine-spacing-xs)',
           height: 60,
           zIndex: 10,
-          display: `${opened ? 'none' : 'flex'}`,
+          // display: `${opened ? 'none' : 'flex'}`,
           transform: `translate3d(0, ${pinned ? 0 : '-110px'}, 0)`,
           transition: 'transform 400ms ease',
         }}
@@ -130,13 +130,20 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
       <AppShell.Navbar bg={theme.white}>
         <Flex w='100%' direction='column' justify='flex-start' gap='md' px='md'>
           <Flex h={70} ml={10} direction='row' align='center' gap='sm'>
-            <Image
-              src={content?.logo?.src || '/logo.png'}
-              alt='Logo'
-              w={content?.logo?.width || 30}
-              h={content?.logo?.height || 30}
-            />
-            <Title order={3}>Vale do Capão</Title>
+            <Anchor
+              href='#home'
+              underline='never'
+              component={Link}
+              className={classes.logo}
+            >
+              <Image
+                src={content?.logo?.src || '/logo.png'}
+                alt='Logo'
+                w={content?.logo?.width || 30}
+                h={content?.logo?.height || 30}
+              />
+              <Title order={3}>Vale do Capão</Title>
+            </Anchor>
             <Burger
               opened={opened}
               onClick={toggle}
@@ -147,32 +154,34 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           </Flex>
           <Flex py={20} direction='column' justify='flex-start' gap={10}>
             <NavLink
-              href='/dashboard'
+              href='/#'
               label='Agenda'
               variant='filled'
               component={Link}
               leftSection={<IconCalendarCheck size={content.svgSize} />}
             />
             <NavLink
-              href='/dashboard'
-              label='Dashboard'
-              variant='filled'
-              component={Link}
-              leftSection={<IconLayoutDashboard size={content.svgSize} />}
-            />
-            <NavLink
-              href='/blog'
+              href='/#'
               label='Blog'
               variant='filled'
               component={Link}
               leftSection={<IconArticle size={content.svgSize} />}
             />
             <NavLink
-              href='/anuncios'
-              label='Anúncios'
+              href='/#'
+              label='Serviços'
               variant='filled'
               component={Link}
-              leftSection={<IconBadgeAd size={content.svgSize} />}
+              leftSection={<IconIcons size={content.svgSize} />}
+            />
+            <ContactModal svgSize={content.svgSize} />
+            <SponsorModal svgSize={content.svgSize} />
+            <NavLink
+              href='/signin'
+              label='Login'
+              variant='filled'
+              component={Link}
+              leftSection={<IconLogin size={content.svgSize} />}
             />
           </Flex>
         </Flex>

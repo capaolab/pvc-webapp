@@ -1,0 +1,47 @@
+.headerAtTop {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: white;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  background: black;
+  color: white;
+}
+
+.menu a {
+  color: white;
+}
+
+.burgerAtTop {
+  color: white;
+}
+
+.burger {
+  color: black;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo img {
+  margin-right: var(--mantine-spacing-md);
+}
+
+.close {
+  margin-left: auto;
+}
+
+.footer {
+  position: relative;
+}

@@ -1,0 +1,51 @@
+/* Card Styles */
+.card {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center;
+  @media (max-width: $mantine-breakpoint-xs) {
+    height: 100vh;
+  }
+}
+
+.title {
+  font-weight: 900px;
+  color: var(--mantine-color-white);
+  line-height: 1.2;
+  font-size: 32px;
+  margin-top: var(--mantine-spacing-xs);
+  cursor: default;
+}
+
+.category {
+  color: var(--mantine-color-white);
+  opacity: 0.7;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+/* Carousel styles */
+.indicator {
+  width: 12px;
+  height: 8px;
+  transition: width 250ms ease;
+
+  &[data-active] {
+    width: 40px;
+  }
+}
+
+.control {
+  background: transparent;
+  color: white;
+  border: none;
+}
+
+.control svg {
+  width: 100px;
+}

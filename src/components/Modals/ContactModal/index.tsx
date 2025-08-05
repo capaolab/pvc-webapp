@@ -1,7 +1,12 @@
-import { Button, Flex, Modal, NavLink } from '@mantine/core';
+import { Button, Flex, Modal, NavLink, ThemeIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconPhone, IconXboxX } from '@tabler/icons-react';
-import Image from 'next/image';
+import {
+  IconBrandLinkedinFilled,
+  IconBrandWhatsapp,
+  IconMailFilled,
+  IconPhone,
+  IconXboxX,
+} from '@tabler/icons-react';
 import Link from 'next/link';
 
 type IProps = {
@@ -33,41 +38,30 @@ function ContactModal({ svgSize }: IProps) {
             variant='filled'
             component={Link}
             leftSection={
-              <Image
-                src='/icons/whatsapp.svg'
-                alt='Contato de Whatsapp'
-                width={25}
-                height={25}
-              />
+              <ThemeIcon color='#25D366' variant='filled' radius='md' size={30}>
+                <IconBrandWhatsapp size={svgSize} color='white' />
+              </ThemeIcon>
             }
           />
+
           <NavLink
             href='/#'
             label='Email'
             variant='filled'
             component={Link}
             leftSection={
-              <Image
-                src='/icons/gmail.svg'
-                alt='Contato de Email'
-                width={25}
-                height={25}
-              />
+              <ThemeIcon color='blue' variant='filled' radius='md'>
+                <IconMailFilled size={svgSize} />
+              </ThemeIcon>
             }
           />
+
           <NavLink
             href='/#'
             label='Linkedin'
             variant='filled'
             component={Link}
-            leftSection={
-              <Image
-                src='/icons/linkedin.svg'
-                alt='Contato de Linkedin'
-                width={25}
-                height={25}
-              />
-            }
+            leftSection={<IconBrandLinkedinFilled color='#0077B5' size={31} />}
           />
         </Flex>
       </Modal>

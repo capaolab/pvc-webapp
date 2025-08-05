@@ -1,11 +1,4 @@
-import {
-  Button,
-  Flex,
-  Modal,
-  NavLink,
-  NumberInput,
-  TextInput,
-} from '@mantine/core';
+import { Button, Flex, Modal, NumberInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCoin, IconXboxX } from '@tabler/icons-react';
@@ -111,7 +104,7 @@ function SponsorModal({ svgSize }: IProps) {
         onClick={open}
         leftSection={<IconCoin size={14} />}
       >
-        Quero Patrocinar
+        Patrocinar
       </Button>
 
       {/* Mobile Button */}
@@ -127,7 +120,7 @@ function SponsorModal({ svgSize }: IProps) {
         size='inherit'
         fw='inherit'
       >
-        Quero Patrocinar
+        Patrocinar
       </Button>
     </>
   );

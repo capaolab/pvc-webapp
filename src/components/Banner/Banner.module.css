@@ -10,7 +10,6 @@
   @media (max-width: $mantine-breakpoint-xs) {
     height: 100vh;
   }
-
 }
 
 .title {

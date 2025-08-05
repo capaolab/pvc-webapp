@@ -79,6 +79,7 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
           underline='never'
           component={Link}
           className={classes.logo}
+          c='white'
         >
           <Image
             src={content?.logo?.src || '/logo.png'}
@@ -112,11 +113,17 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
         </Flex>
         <Flex gap='md' align='center' display={{ base: 'none', lg: 'flex' }}>
           <SponsorModal />
-          <Anchor href='/signin' underline='never' component={Link} c='white'>
+          <Button
+            variant='default'
+            radius='sm'
+            c='dark'
+            href='/signin'
+            component={Link}
+          >
             Login
-          </Anchor>
+          </Button>
           <Button variant='default' radius='sm' c='dark'>
-            Sign Up
+            Registro
           </Button>
         </Flex>
         <Burger
@@ -142,7 +149,9 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
                 w={content?.logo?.width || 30}
                 h={content?.logo?.height || 30}
               />
-              <Title order={3}>Vale do Capão</Title>
+              <Title order={3} fw={700}>
+                Vale do Capão
+              </Title>
             </Anchor>
             <Burger
               opened={opened}

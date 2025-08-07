@@ -10,9 +10,14 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+
+import { defaultNotification } from '@/lib/message.config';
 
 function SignInForm() {
   const theme = useMantineTheme();
+  const router = useRouter();
 
   const form = useForm({
     mode: 'uncontrolled',
@@ -25,16 +30,35 @@ function SignInForm() {
       email: value => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
       password: value => {
         if (value.length < 8) return 'Senha muito curta';
-        if (!/(?=.*[a-zA-Z])(?=.*\d)/.test(value))
-          return 'Senha precisa de letras e números';
+        // if (!/(?=.*[a-zA-Z])(?=.*\d)/.test(value))
+        //   return 'Senha precisa de letras e números';
         return null;
       },
     },
   });
 
-  const handleSubmit = () => {
-    console.log(form.values);
+  const handleSubmit = async () => {
+    const { email, password } = form.values;
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+      console.log(result);
+      if (result?.error) {
+        defaultNotification({
+          title: 'Login falhou',
+          message: result.error,
+        });
+      } else {
+        router.push('/dashboard');
+      }
+    } catch (err) {
+      console.error('Erro ao fazer login:', err);
+    }
   };
+
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Paper mt='xl' bg={theme.colors.gray[1]} shadow='sm' p='xl'>

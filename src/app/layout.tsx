@@ -3,6 +3,7 @@
  * @see https://mantine.dev/styles/css-files-list/
  */
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import '@mantine/spotlight/styles.css';
 import '@mantine/carousel/styles.css';
 import '@gfazioli/mantine-flip/styles.css';
@@ -13,6 +14,7 @@ import {
   mantineHtmlProps,
   MantineProvider,
 } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
@@ -46,7 +48,10 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MantineProvider theme={theme} defaultColorScheme='light'>
-          <AppContentProvider>{children}</AppContentProvider>
+          <AppContentProvider>
+            {children}
+            <Notifications />
+          </AppContentProvider>
         </MantineProvider>
       </body>
     </html>
